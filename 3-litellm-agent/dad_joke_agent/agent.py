@@ -4,14 +4,25 @@ import random
 from google.adk.agents import Agent
 from google.adk.models.lite_llm import LiteLlm
 
-# https://docs.litellm.ai/docs/providers/openrouter
+# --- LEARNING NOTE: OPENROUTER CONFIGURATION (IGNORED) ---
+# The instructor uses OpenRouter to access models via a middleman.
+# Since you have a direct OpenAI key, we skip this specific setup.
+# model = LiteLlm(
+#     model="openrouter/openai/gpt-4.1",
+#     api_key=os.getenv("OPENROUTER_API_KEY"),
+# )
+
+# --- YOUR DIRECT OPENAI CONFIGURATION ---
+# LiteLlm automatically looks for "OPENAI_API_KEY" in your .env file.
+# We just specify the model name directly.
 model = LiteLlm(
-    model="openrouter/openai/gpt-4.1",
-    api_key=os.getenv("OPENROUTER_API_KEY"),
+    model="gpt-4.1-nano", 
 )
 
-
 def get_dad_joke():
+    """
+    Returns a random dad joke.
+    """
     jokes = [
         "Why did the chicken cross the road? To get to the other side!",
         "What do you call a belt made of watches? A waist of time.",

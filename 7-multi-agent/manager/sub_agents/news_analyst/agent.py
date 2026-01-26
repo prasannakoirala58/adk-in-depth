@@ -1,9 +1,13 @@
 from google.adk.agents import Agent
 from google.adk.tools import google_search
 
+from google.adk.models.lite_llm import LiteLlm
+
+model = LiteLlm(model="gpt-4.1-nano")
+
 news_analyst = Agent(
     name="news_analyst",
-    model="gemini-2.0-flash",
+    model=model,
     description="News analyst agent",
     instruction="""
     You are a helpful assistant that can analyze news articles and provide a summary of the news.

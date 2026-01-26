@@ -1,6 +1,10 @@
 from google.adk.agents import Agent
 from google.adk.tools.tool_context import ToolContext
 
+from google.adk.models.lite_llm import LiteLlm
+
+model = LiteLlm(model="gpt-4.1-nano")
+
 
 def get_nerd_joke(topic: str, tool_context: ToolContext) -> dict:
     """Get a nerdy joke about a specific topic."""
@@ -30,7 +34,7 @@ def get_nerd_joke(topic: str, tool_context: ToolContext) -> dict:
 # Create the funny nerd agent
 funny_nerd = Agent(
     name="funny_nerd",
-    model="gemini-2.0-flash",
+    model=model,
     description="An agent that tells nerdy jokes about various topics.",
     instruction="""
     You are a funny nerd agent that tells nerdy jokes about various topics.

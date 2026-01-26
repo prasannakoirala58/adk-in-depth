@@ -3,6 +3,10 @@ from datetime import datetime
 import yfinance as yf
 from google.adk.agents import Agent
 
+from google.adk.models.lite_llm import LiteLlm
+
+model = LiteLlm(model="gpt-4.1-nano")
+
 
 def get_stock_price(ticker: str) -> dict:
     """Retrieves current stock price and saves to session state."""
@@ -39,7 +43,7 @@ def get_stock_price(ticker: str) -> dict:
 # Create the root agent
 stock_analyst = Agent(
     name="stock_analyst",
-    model="gemini-2.0-flash",
+    model=model,
     description="An agent that can look up stock prices and track them over time.",
     instruction="""
     You are a helpful stock market assistant that helps users track their stocks of interest.

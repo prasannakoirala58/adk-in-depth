@@ -6,9 +6,13 @@ from .sub_agents.news_analyst.agent import news_analyst
 from .sub_agents.stock_analyst.agent import stock_analyst
 from .tools.tools import get_current_time
 
+from google.adk.models.lite_llm import LiteLlm
+
+model = LiteLlm(model="gpt-4.1-nano")
+
 root_agent = Agent(
     name="manager",
-    model="gemini-2.0-flash",
+    model=model,
     description="Manager agent",
     instruction="""
     You are a manager agent that is responsible for overseeing the work of the other agents.
@@ -26,7 +30,10 @@ root_agent = Agent(
     """,
     sub_agents=[stock_analyst, funny_nerd],
     tools=[
-        AgentTool(news_analyst),
+        # This is not working with LiteLLM, as we are using a non-Google model
+        # Also, if we do not wrap the agent in an AgentTool, we will get an error
+        # because sub agent cannot be used as a tool directly.
+        AgentTool(news_analyst), 
         get_current_time,
     ],
 )

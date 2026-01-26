@@ -1,4 +1,5 @@
 from google.adk.agents import LlmAgent
+from google.adk.models.lite_llm import LiteLlm
 from pydantic import BaseModel, Field
 
 
@@ -12,10 +13,14 @@ class EmailContent(BaseModel):
     )
 
 
+# --- Configure the Model ---
+model = LiteLlm(model="gpt-4.1-nano")
+
+
 # --- Create Email Generator Agent ---
 root_agent = LlmAgent(
     name="email_agent",
-    model="gemini-2.0-flash",
+    model=model,
     instruction="""
         You are an Email Generation Assistant.
         Your task is to generate a professional email based on the user's request.
@@ -36,6 +41,8 @@ root_agent = LlmAgent(
             "subject": "Subject line here",
             "body": "Email body here with proper paragraphs and formatting",
         }
+        
+        Make sure to format the output to make it pretty and readable as well (like pretty-printed JSON with indentation).
 
         DO NOT include any explanations or additional text outside the JSON response.
     """,
