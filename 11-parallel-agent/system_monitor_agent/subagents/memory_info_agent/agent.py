@@ -8,13 +8,14 @@ from google.adk.agents import LlmAgent
 
 from .tools import get_memory_info
 
-# --- Constants ---
-GEMINI_MODEL = "gemini-2.0-flash"
+from google.adk.models.lite_llm import LiteLlm
+
+model = LiteLlm(model="gpt-4.1-nano")
 
 # Memory Information Agent
 memory_info_agent = LlmAgent(
     name="MemoryInfoAgent",
-    model=GEMINI_MODEL,
+    model=model,
     instruction="""You are a Memory Information Agent.
     
     When asked for system information, you should:
