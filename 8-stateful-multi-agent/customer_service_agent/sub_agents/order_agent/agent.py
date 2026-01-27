@@ -3,6 +3,10 @@ from datetime import datetime
 from google.adk.agents import Agent
 from google.adk.tools.tool_context import ToolContext
 
+from google.adk.models.lite_llm import LiteLlm
+
+model = LiteLlm(model="gpt-4.1-nano")
+
 
 def get_current_time() -> dict:
     """Get the current time in the format YYYY-MM-DD HH:MM:SS"""
@@ -71,7 +75,7 @@ def refund_course(tool_context: ToolContext) -> dict:
 # Create the order agent
 order_agent = Agent(
     name="order_agent",
-    model="gemini-2.0-flash",
+    model=model,
     description="Order agent for viewing purchase history and processing refunds",
     instruction="""
     You are the order agent for the AI Developer Accelerator community.

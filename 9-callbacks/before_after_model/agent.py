@@ -14,6 +14,11 @@ from google.adk.agents.callback_context import CallbackContext
 from google.adk.models import LlmRequest, LlmResponse
 from google.genai import types
 
+from google.adk.models.lite_llm import LiteLlm
+
+model = LiteLlm(model="gpt-4.1-nano")
+
+
 
 def before_model_callback(
     callback_context: CallbackContext, llm_request: LlmRequest
@@ -147,7 +152,7 @@ def after_model_callback(
 # Create the Agent
 root_agent = LlmAgent(
     name="content_filter_agent",
-    model="gemini-2.0-flash",
+    model=model,
     description="An agent that demonstrates model callbacks for content filtering and logging",
     instruction="""
     You are a helpful assistant.

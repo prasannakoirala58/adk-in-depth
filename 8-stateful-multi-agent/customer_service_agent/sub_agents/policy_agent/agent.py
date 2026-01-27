@@ -1,9 +1,13 @@
 from google.adk.agents import Agent
 
+from google.adk.models.lite_llm import LiteLlm
+
+model = LiteLlm(model="gpt-4.1-nano")
+
 # Create the policy agent
 policy_agent = Agent(
     name="policy_agent",
-    model="gemini-2.0-flash",
+    model=model,
     description="Policy agent for the AI Developer Accelerator community",
     instruction="""
     You are the policy agent for the AI Developer Accelerator community. Your role is to help users

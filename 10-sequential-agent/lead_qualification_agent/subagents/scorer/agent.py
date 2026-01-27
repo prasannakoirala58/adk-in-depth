@@ -7,13 +7,14 @@ based on various criteria.
 
 from google.adk.agents import LlmAgent
 
-# --- Constants ---
-GEMINI_MODEL = "gemini-2.0-flash"
+from google.adk.models.lite_llm import LiteLlm
+
+model = LiteLlm(model="gpt-4.1-nano")
 
 # Create the scorer agent
 lead_scorer_agent = LlmAgent(
     name="LeadScorerAgent",
-    model=GEMINI_MODEL,
+    model=model,
     instruction="""You are a Lead Scoring AI.
     
     Analyze the lead information and assign a qualification score from 1-10 based on:

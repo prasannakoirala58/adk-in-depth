@@ -12,6 +12,11 @@ from google.adk.agents import LlmAgent
 from google.adk.agents.callback_context import CallbackContext
 from google.genai import types
 
+from google.adk.models.lite_llm import LiteLlm
+
+model = LiteLlm(model="gpt-4.1-nano")
+
+
 
 def before_agent_callback(callback_context: CallbackContext) -> Optional[types.Content]:
     """
@@ -91,7 +96,7 @@ def after_agent_callback(callback_context: CallbackContext) -> Optional[types.Co
 # Create the Agent
 root_agent = LlmAgent(
     name="before_after_agent",
-    model="gemini-2.0-flash",
+    model=model,
     description="A basic agent that demonstrates before and after agent callbacks",
     instruction="""
     You are a friendly greeting agent. Your name is {agent_name}.
